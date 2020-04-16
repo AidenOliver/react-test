@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import './App.css';
 
-function Item({item, index}) {
+function Item({item}) {
   return (
     <div className="item">
       {item.text}
@@ -19,13 +19,14 @@ function ItemForm({addItem}) {
   }
   
   return (
-    <div className="App">
+    <div className="item-form">
         <form onSubmit={handleSubmit}>
           <input 
             type="text" 
             value={value}
             onChange={e => setValue(e.target.value)}
           />
+          <button onSubmit={handleSubmit}>Submit</button>
           
         </form>
     </div>
@@ -43,10 +44,8 @@ function App() {
   return (
     <div className="App">
       <div className="item-list">
-        {items.map((item, index) => (
+        {items.map((item) => (
           <Item 
-            key={index}
-            index={index}
             item={item}
           />
         ))}
