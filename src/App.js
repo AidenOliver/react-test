@@ -9,6 +9,15 @@ function Item({item}) {
   )
 }
 
+const data = [
+  {
+  name: "Aiden Oliver",
+  skills: "JavaScript, HTML, CSS",
+  langs: "English, Portuguese, French",
+  projects: "book-app, recipe-app, chatroom"
+  }
+];
+
 function ItemForm({addItem}) {
   const [value, setValue] = useState("");
 
@@ -50,6 +59,16 @@ function App() {
           />
         ))}
         <ItemForm addItem={addItem} />
+        <div>
+          {data.map((data, index) => (
+            <div key={index}>
+              <h3>{data.name}</h3>
+              <h3>{data.skills}</h3>
+              <h3>{data.langs}</h3>
+              <h3>{data.projects}</h3>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
