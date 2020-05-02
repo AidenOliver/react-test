@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import Filter from './Filter'
+import Numbers from './Numbers'
+
 import './App.css';
 
 function Item({item}) {
@@ -50,6 +53,41 @@ function App() {
     setItems(newItems);
   }
 
+  const [word, setWord] = useState("");
+  const [persons] = useState([
+    {
+      name: "Aiden Oliver",
+      number: "123-456-9300"
+    },
+    {
+      name: "Bruce Wayne",
+      number: "606-354-8671"
+    },
+    {
+      name: "Peter Parker",
+      number: "495-839-0192"
+    }
+  ]);
+
+  const [filterDisplay, setFilterDisplay] = useState([]);
+
+  const handleChange = e => {
+    setWord(e);
+    let oldList = persons.map(person => {
+      return {name: person.name.toLowerCase(), number: person.number};
+    });
+
+    if (word !== "") {
+      let newList = [];
+
+      newList = oldList.filter(person => person.name.includes(word.toLowerCase()));
+
+      setFilterDisplay(newList);
+    } else {
+      setFilterDisplay(persons);
+    }
+  }
+
   return (
     <div className="App">
       <div className="item-list">
@@ -69,6 +107,10 @@ function App() {
             </div>
           ))}
         </div>
+      </div>
+      <div>
+        <Filter value={word} handleChange={e => handleChange(e.target.value)} />
+        <Numbers persons={word.length < 1 ? persons : filterDisplay} />
       </div>
     </div>
   );
