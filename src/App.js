@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import Filter from './Filter'
 import Numbers from './Numbers'
 
 import './App.css';
-
+// item jsx component
 function Item({item}) {
   return (
     <div className="item">
@@ -11,25 +11,17 @@ function Item({item}) {
     </div>
   )
 }
-
-const data = [
-  {
-  name: "Aiden Oliver",
-  skills: "JavaScript, HTML, CSS",
-  langs: "English, Portuguese, French",
-  projects: "book-app, recipe-app, chatroom"
-  }
-];
-
+// item form component
 function ItemForm({addItem}) {
+  // initialize value as empty string
   const [value, setValue] = useState("");
-
+  // call addItem, pass in value and set value to empty string
   const handleSubmit = e => {
     e.preventDefault();
     addItem(value);
     setValue("");
   }
-  
+  // return form and input jsx
   return (
     <div className="item-form">
         <form onSubmit={handleSubmit}>
@@ -47,6 +39,21 @@ function ItemForm({addItem}) {
 
 function App() {
   const [items, setItems] = useState([]);
+  const [data, setData] = useState([
+    {
+      name: "Aiden Oliver",
+      skills: "JavaScript, HTML, CSS",
+      langs: "English, Portuguese, French",
+      projects: "book-app, recipe-app, chatroom"
+    },
+    {
+      name: "Bruce Wayne",
+      skills: "Python, Ruby On Rails, Node.js",
+      langs: "English, Japanese, Russian",
+    }
+  ]);
+
+
 
   const addItem = text => {
     const newItems = [...items, {text}];
